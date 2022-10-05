@@ -6,9 +6,40 @@ from .models import Blog
 
 
 def index(request):
+    return render(request, 'index.html')
+
+def blog(request):
+    blogs = Blog.objects.order_by('-pub_date')[:5]
+    context = {'blogs': blogs}
+    return render(request, 'blog.html', context)
+
+
+def blog_detail(request, blog_slug=0):
+    blog = get_object_or_404(Blog, blog_slug=blog_slug)
+    context = {'blog': blog}
+    return render(request, 'blog-detail.html', context)
+
+def contact(request):
     latest_blog_list = Blog.objects.order_by('-pub_date')[:5]
     context = {'latest_blog_list': latest_blog_list}
-    return render(request, 'index.html', context)
+    return render(request, 'contact.html', context)
+
+
+def services(request):
+    latest_blog_list = Blog.objects.order_by('-pub_date')[:5]
+    context = {'latest_blog_list': latest_blog_list}
+    return render(request, 'services.html', context)
+
+def about(request):
+    latest_blog_list = Blog.objects.order_by('-pub_date')[:5]
+    context = {'latest_blog_list': latest_blog_list}
+    return render(request, 'about.html', context)
+
+
+def portfolio(request):
+    latest_blog_list = Blog.objects.order_by('-pub_date')[:5]
+    context = {'latest_blog_list': latest_blog_list}
+    return render(request, 'portfolio.html', context)
 
 # def detail(request, question_id):
 #     question = get_object_or_404(Question, pk=question_id)
