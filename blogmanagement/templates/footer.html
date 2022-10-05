@@ -59,6 +59,13 @@
 
 <!-- LeadMark js -->
 <script src="{% static 'assets/js/leadmark.js' %}"></script>
-
+<!--alertify JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script>
+ {% for flashmsg in messages %}
+    alertify.set('notifier','position', 'top-right');
+    alertify.success('{{flashmsg}}');
+ {% endfor %}
+</script>
 </body>
 </html>

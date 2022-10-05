@@ -5,7 +5,7 @@ from .models import Blog
 
 class BlogAdmin(admin.ModelAdmin):
     # ...
-    list_display = ('title', 'pub_date')
+    list_display = ['id','title','description','image','pub_date']
 
 
 # Register your models here.

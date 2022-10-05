@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with LeadMark landing page.">
     <meta name="author" content="Devcrud">
-    <title>LeadMark Landing page | Free Bootstrap 4.3.x landing page</title>
+    <title>{% block page_title %} {% endblock page_title %}</title>
     <!-- font icons -->
     <link rel="stylesheet" href="{% static 'assets/vendors/themify-icons/css/themify-icons.css' %}">
     <!-- Bootstrap + LeadMark main styles -->
 	<link rel="stylesheet" href="{% static 'assets/css/leadmark.css' %}">
-
+    
+    <!--Alertifyjs CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     {% comment %} For Custom CSS {% endcomment %}
  
     {% block custom_css %}

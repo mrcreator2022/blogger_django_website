@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.contrib import messages
 
 from .models import Blog
 
@@ -11,34 +12,40 @@ def index(request):
 def blog(request):
     blogs = Blog.objects.order_by('-pub_date')[:5]
     context = {'blogs': blogs}
+    messages.success(request, "Welcome to blog page")
     return render(request, 'blog.html', context)
 
 
 def blog_detail(request, blog_slug=0):
     blog = get_object_or_404(Blog, blog_slug=blog_slug)
     context = {'blog': blog}
+    messages.success(request, "Welcome to blog detail page")
     return render(request, 'blog-detail.html', context)
 
 def contact(request):
     latest_blog_list = Blog.objects.order_by('-pub_date')[:5]
     context = {'latest_blog_list': latest_blog_list}
+    messages.success(request, "Welcome to contact page")
     return render(request, 'contact.html', context)
 
 
 def services(request):
     latest_blog_list = Blog.objects.order_by('-pub_date')[:5]
     context = {'latest_blog_list': latest_blog_list}
+    messages.success(request, "Welcome to our services page")
     return render(request, 'services.html', context)
 
 def about(request):
     latest_blog_list = Blog.objects.order_by('-pub_date')[:5]
     context = {'latest_blog_list': latest_blog_list}
+    messages.success(request, "Welcome to about page")
     return render(request, 'about.html', context)
 
 
 def portfolio(request):
     latest_blog_list = Blog.objects.order_by('-pub_date')[:5]
     context = {'latest_blog_list': latest_blog_list}
+    messages.success(request, "Welcome to portfolio page")
     return render(request, 'portfolio.html', context)
 
 # def detail(request, question_id):
