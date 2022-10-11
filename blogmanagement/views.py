@@ -1,9 +1,9 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.contrib import messages
 
-from .models import Blog
+from .models import Blog,Customer
 
 
 def index(request):
@@ -47,6 +47,35 @@ def portfolio(request):
     context = {'latest_blog_list': latest_blog_list}
     messages.success(request, "Welcome to portfolio page")
     return render(request, 'portfolio.html', context)
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+def logout(request):
+    del request.session['customer_detail']
+    return redirect('/login/')
+
+def login(request):
+    if 'customer_detail' not in request.session:
+        return render(request, 'login.html')
+    else:
+        return redirect('/dashboard/')
+
+def signin(request):
+    msg=''
+    if request.method=='POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        if (Customer.objects.filter(email=email,password=password)).exists():
+           customerDetail = Customer.objects.filter(email=email).first()
+           request.session['customer_detail'] = {"customer_email":customerDetail.email,"customer_id":customerDetail.id,'msg':'Successfull login'}
+           return redirect('/dashboard/')
+        else:
+            request.session['customer_detail'] = {"customer_email":'',"customer_id":'','msg':'invalid login'}
+
+    return render(request, 'login.html',{'msg':msg})
+
+
 
 # def detail(request, question_id):
 #     question = get_object_or_404(Question, pk=question_id)
